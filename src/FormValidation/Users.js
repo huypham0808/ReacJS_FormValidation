@@ -11,7 +11,12 @@ class Users extends Component {
       getDeleteSinhVien={getDeleteSinhVien}/>
     })
   };
+  //Submit : Add / Update Sinh vien
+  handleSubmitSinhVien = () =>{
+
+  }
   render() {
+    
     return (
       <div>
         <table className="table">
