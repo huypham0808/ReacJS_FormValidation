@@ -3,20 +3,17 @@ import UserItem from "./UserItem";
 
 class Users extends Component {
   renderListSV = () =>{
-    const {listSV, getDeleteSinhVien} = this.props;
+    const {listSV, getDeleteSinhVien, getEditSinhVien} = this.props;
     return listSV.map((sinhVien)=>{
       return <UserItem 
       key={sinhVien.id} 
       sinhVien={sinhVien}
-      getDeleteSinhVien={getDeleteSinhVien}/>
+      getDeleteSinhVien={getDeleteSinhVien}
+      getEditSinhVien = {getEditSinhVien}/>
     })
   };
-  //Submit : Add / Update Sinh vien
-  handleSubmitSinhVien = () =>{
-
-  }
   render() {
-    
+
     return (
       <div>
         <table className="table">

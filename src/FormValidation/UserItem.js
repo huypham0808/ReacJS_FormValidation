@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class UserItem extends Component {
   render() {
-    const {sinhVien, getDeleteSinhVien} = this.props;
+    const {sinhVien, getDeleteSinhVien, getEditSinhVien} = this.props;
     return (
       <tr>
         <td>{sinhVien.id}</td>
@@ -14,6 +14,8 @@ class UserItem extends Component {
             className="btn btn-info mr-2"
             data-toggle="modal"
             data-target="#modelIdUser"
+            onClick={() => {
+              getEditSinhVien(sinhVien)}}
           >
             Edit
           </button>

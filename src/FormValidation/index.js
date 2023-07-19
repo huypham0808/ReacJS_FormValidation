@@ -5,9 +5,9 @@ import Modal from "./modal";
 class Home extends Component {
    constructor(props) {
       super(props);
-
       this.state = {
          listSV: data,
+         sinhVienEdit: null
       }
    }
    //Tim vi tri de xoa
@@ -35,16 +35,24 @@ class Home extends Component {
       this.setState({
          listSV: listSinhVienClone,
       })
-   }
+   };
+   //Edit Sinh Vien
+   handleEditSinhVien = (sinhVien) =>{
+      this.setState({
+         sinhVienEdit: sinhVien,
+      })
+   };
    render() {
-      const { listSV } = this.state;
+      const { listSV, sinhVienEdit} = this.state;
       return (
          <div className="container">
             <h5 className="display-5 text-left p-3 my-3 bg-dark text-light">THÔNG TIN SINH VIÊN</h5>
-            <Modal getSinhVienSubmit={this.handleSubmitSinhVien}/>
+            <Modal getSinhVienSubmit={this.handleSubmitSinhVien}
+            sinhVienEdit={sinhVienEdit}/>
             <Users
                getDeleteSinhVien={this.handleDeleteSinhVien}
-               listSV={listSV} />
+               listSV={listSV} 
+               getEditSinhVien = {this.handleEditSinhVien}/>
          </div>
       );
    }

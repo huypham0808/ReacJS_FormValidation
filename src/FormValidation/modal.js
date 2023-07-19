@@ -25,6 +25,9 @@ export default class Modal extends Component {
       //truyền state ra index
       this.props.getSinhVienSubmit(this.state);
    };
+   UNSAFE_componentWillReceiveProps(){
+      console.log("UNSAFE_componentWillReceiveProps");
+   }
    render() {
       return (
          <div>
@@ -33,24 +36,24 @@ export default class Modal extends Component {
                   <div className="form-group w-50 mr-5">
                      <h5>Mã SV</h5>
                      <input type="text" className="form-control mb-3" onChange={this.handleOnChange}
-                        name="id" />
+                        name="id" value={this.state.id} />
                   </div>
                   <div className="form-group w-50">
                      <h5>Họ tên</h5>
                      <input type="text" className="form-control mb-3" onChange={this.handleOnChange}
-                        name="fullName" />
+                        name="fullName" value={this.state.fullName} />
                   </div>
                </div>
                <div className="rowTop d-flex justify-content-between align-items-center">
                   <div className="form-group w-50 mr-5">
                      <h5>Số điện thoại</h5>
                      <input type="number" className="form-control mb-3" onChange={this.handleOnChange}
-                        name="phoneNumber" />
+                        name="phoneNumber" value={this.state.phoneNumber} />
                   </div>
                   <div className="form-group w-50">
                      <h5>Email</h5>
                      <input type="text" className="form-control mb-3" onChange={this.handleOnChange}
-                        name="email" />
+                        name="email" value={this.state.email} />
                   </div>
                </div>
                <div className="d-flex justify-content-start align-items-center">
