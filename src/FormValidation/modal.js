@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Search from './Search'
 
 export default class Modal extends Component {
    constructor(props) {
@@ -17,7 +16,7 @@ export default class Modal extends Component {
       const { name, value } = event.target;
       //Cập nhật lại trong form
       this.setState({
-            [name]: value,
+         [name]: value,
       });
    };
    handleSubmit = (event) => {
@@ -25,9 +24,27 @@ export default class Modal extends Component {
       //truyền state ra index
       this.props.getSinhVienSubmit(this.state);
    };
-   UNSAFE_componentWillReceiveProps(){
-      console.log("UNSAFE_componentWillReceiveProps");
-   }
+   UNSAFE_componentWillReceiveProps(nextProps) {
+      //Cập nhật lại state
+      if (nextProps && nextProps.sinhVienEdit) {
+         this.setState({
+            id: nextProps.sinhVienEdit.id,
+            fullName: nextProps.sinhVienEdit.fullName,
+            userName: nextProps.sinhVienEdit.userName,
+            email: nextProps.sinhVienEdit.email,
+            phoneNumber: nextProps.sinhVienEdit.phoneNumber,
+         })
+      } else {
+         //reset state
+         this.setState({
+            id: "",
+            fullName: "",
+            userName: "",
+            email: "",
+            phoneNumber: "",
+         })
+      }
+   };
    render() {
       return (
          <div>
@@ -56,9 +73,8 @@ export default class Modal extends Component {
                         name="email" value={this.state.email} />
                   </div>
                </div>
-               <div className="d-flex justify-content-start align-items-center">
-                  <button className="btn btn-success mb-3 btnThemSV" type="submit">Thêm sinh viên</button>
-                  <Search />
+               <div className="d-flex align-items-center">
+                  <button className="btn btn-success mb-3 " type="submit">Thêm / Cập nhật Sinh viên</button>         
                </div>
             </form>
          </div>

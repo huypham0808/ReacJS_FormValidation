@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import Users from "./Users";
 import data from './DataSV.json'
 import Modal from "./modal";
+import Search from "./Search";
 class Home extends Component {
    constructor(props) {
       super(props);
       this.state = {
          listSV: data,
-         sinhVienEdit: null
+         sinhVienEdit: null,
+         keyword: "",
       }
    }
    //Tim vi tri de xoa
@@ -29,30 +31,49 @@ class Home extends Component {
       }
    };
    //Submit Sinh Vien
-   handleSubmitSinhVien = (sinhVien)=>{
-      //Add Sinh Vien
-      let listSinhVienClone = [...this.state.listSV, sinhVien];
-      this.setState({
-         listSV: listSinhVienClone,
-      })
+   handleSubmitSinhVien = (sinhVien) => {
+      if (sinhVien.id) {
+         const index = this._findIndex(sinhVien.id);
+         if (index !== -1) {
+            let listSinhVienClone = [...this.state.listSV];
+            listSinhVienClone[index] = sinhVien;
+            this.setState({
+               listSV: listSinhVienClone,
+            })
+         }
+      } else {
+         //Add Sinh Vien
+         let listSinhVienClone = [...this.state.listSV, sinhVien];
+         this.setState({
+            listSV: listSinhVienClone,
+         })
+      }
    };
    //Edit Sinh Vien
-   handleEditSinhVien = (sinhVien) =>{
+   handleEditSinhVien = (sinhVien) => {
       this.setState({
          sinhVienEdit: sinhVien,
       })
    };
+   handleGetKeyWord = (keyword) => {
+      this.setState({
+         keyword,
+      })
+   }
    render() {
-      const { listSV, sinhVienEdit} = this.state;
+      let { listSV, sinhVienEdit, keyword } = this.state;
+      listSV = listSV.filter((sinhVien) => sinhVien.fullName.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
+      );
       return (
          <div className="container">
             <h5 className="display-5 text-left p-3 my-3 bg-dark text-light">THÔNG TIN SINH VIÊN</h5>
             <Modal getSinhVienSubmit={this.handleSubmitSinhVien}
-            sinhVienEdit={sinhVienEdit}/>
+               sinhVienEdit={sinhVienEdit} />
+            <Search getKeyWord={this.handleGetKeyWord} />
             <Users
                getDeleteSinhVien={this.handleDeleteSinhVien}
-               listSV={listSV} 
-               getEditSinhVien = {this.handleEditSinhVien}/>
+               listSV={listSV}
+               getEditSinhVien={this.handleEditSinhVien} />
          </div>
       );
    }

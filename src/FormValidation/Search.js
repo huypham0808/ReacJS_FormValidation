@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 
 class Search extends Component {
+  handleOnChange=(e)=>{
+    this.props.getKeyWord(e.target.value );
+  }
   render() {
     return (
-      <div className="d-flex align-items-center mb-3 ml-5">
-        <h5 className="mr-3">Tìm kiếm</h5>
-        <input type="text" className="form-control searchUser" />
+      <div className="d-flex align-items-center txtSearch w-100">
+        <h6 className="mr-3">Tìm kiếm</h6>
+        <input type="text" className="form-control searchUser" 
+        onChange={this.handleOnChange}/>
       </div>
     );
   }

@@ -13,8 +13,12 @@ code {
 }
 
 .searchUser {
-  width: 500px;
+  width: 400px;
 }
-.btnThemSV {
-  margin-right: 330px;
+.txtSearch {
+  display: flex;
+  position: relative;
+  /* margin-left: 330px; */
+  top: -54px;
+  right: -630px;
 }
